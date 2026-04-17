@@ -1,0 +1,49 @@
+{
+  "expo": {
+    "name": "FitCoach AI",
+    "slug": "fitcoach-ai",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "scheme": "fitcoach",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0A0F1E"
+    },
+    "ios": {
+      "bundleIdentifier": "com.fitcoach.ai",
+      "supportsTablet": false,
+      "infoPlist": {
+        "NSMotionUsageDescription": "FitCoach uses motion data to count your steps and track your walks.",
+        "NSCameraUsageDescription": "FitCoach uses your camera to scan food barcodes and identify meals.",
+        "NSHealthShareUsageDescription": "FitCoach reads your health data to give personalized coaching.",
+        "NSHealthUpdateUsageDescription": "FitCoach saves your activity and nutrition data to Apple Health.",
+        "NSLocationWhenInUseUsageDescription": "FitCoach tracks your walking route to map your exercise.",
+        "UIBackgroundModes": ["processing", "fetch"]
+      }
+    },
+    "android": {
+      "package": "com.fitcoach.ai",
+      "permissions": [
+        "ACTIVITY_RECOGNITION",
+        "CAMERA",
+        "ACCESS_FINE_LOCATION"
+      ]
+    },
+    "plugins": [
+      "expo-router",
+      "expo-camera",
+      [
+        "expo-sensors",
+        {
+          "motionPermission": "FitCoach uses motion data to count your steps."
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}

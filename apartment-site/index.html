@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Haven</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ── NAVBAR ── -->
+<header class="nav">
+  <div class="nav-inner">
+    <div class="nav-left">
+      <a class="wordmark" href="#" onclick="showView('home');return false;">Haven</a>
+      <nav class="nav-links">
+        <a class="nl" href="#" onclick="showView('listings');return false;">Rent</a>
+        <a class="nl" href="#" onclick="showView('listings');return false;">Buy</a>
+        <a class="nl" href="#">Sell</a>
+        <a class="nl" href="#">Agents</a>
+        <a class="nl" href="#">Resources</a>
+      </nav>
+    </div>
+    <div class="nav-right">
+      <button class="btn-ghost" onclick="showModal('login')">Sign in</button>
+      <button class="btn-accent" onclick="showModal('signup')">Get started</button>
+    </div>
+  </div>
+</header>
+
+<!-- ── HOME ── -->
+<section id="view-home" class="view active">
+
+  <div class="hero">
+    <div class="hero-left">
+      <p class="hero-eyebrow">Over 12,400 homes across 50 cities</p>
+      <h1 class="hero-headline">Find where<br>you belong.</h1>
+      <p class="hero-sub">Transparent pricing, zero hidden fees, and agents who actually know the neighborhood.</p>
+      <div class="hero-search">
+        <svg class="hs-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="9" r="6.5"/><path d="m15.5 15.5 3 3" stroke-linecap="round"/></svg>
+        <input id="hero-input" type="text" placeholder="City, neighborhood, or address" />
+        <button class="hs-btn" onclick="doHeroSearch()">Search</button>
+      </div>
+      <div class="hero-cities">
+        <span class="hc-label">Popular:</span>
+        <button class="hc-tag" onclick="filterByCity('New York')">New York</button>
+        <button class="hc-tag" onclick="filterByCity('Los Angeles')">Los Angeles</button>
+        <button class="hc-tag" onclick="filterByCity('Miami')">Miami</button>
+        <button class="hc-tag" onclick="filterByCity('Chicago')">Chicago</button>
+        <button class="hc-tag" onclick="filterByCity('Austin')">Austin</button>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-mosaic">
+        <div class="hm-a" style="background-image:url('https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=900&q=80')"></div>
+        <div class="hm-b" style="background-image:url('https://images.unsplash.com/photo-1484154218962-a197022b5858?w=500&q=80')"></div>
+        <div class="hm-c" style="background-image:url('https://images.unsplash.com/photo-1560448204-603b3fc33ddc?w=500&q=80')"></div>
+      </div>
+      <div class="hero-badge">
+        <span class="hbdg-n">98%</span>
+        <span class="hbdg-t">of renters found a home within 30 days</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="home-featured">
+    <div class="hf-head">
+      <div>
+        <p class="section-eye">Hand-picked</p>
+        <h2 class="section-h">Featured listings</h2>
+      </div>
+      <a class="see-all" href="#" onclick="showView('listings');return false;">View all homes →</a>
+    </div>
+    <div class="featured-grid" id="featured-grid"></div>
+  </div>
+
+  <div class="home-stats">
+    <div class="stat-item"><span class="stat-n">12,400+</span><span class="stat-l">Active listings</span></div>
+    <div class="stat-div"></div>
+    <div class="stat-item"><span class="stat-n">$0</span><span class="stat-l">Buyer agent fee</span></div>
+    <div class="stat-div"></div>
+    <div class="stat-item"><span class="stat-n">50+</span><span class="stat-l">Cities covered</span></div>
+    <div class="stat-div"></div>
+    <div class="stat-item"><span class="stat-n">98%</span><span class="stat-l">Satisfaction rate</span></div>
+  </div>
+
+  <div class="home-cities">
+    <div class="hc-head"><p class="section-eye">Explore</p><h2 class="section-h">Browse by city</h2></div>
+    <div class="city-grid">
+      <div class="city-card" onclick="filterByCity('New York')">
+        <div class="cc-img" style="background-image:url('https://images.unsplash.com/photo-1518235506717-e1ed3306a89b?w=600&q=80')"></div>
+        <div class="cc-body"><span class="cc-name">New York, NY</span><span class="cc-ct">3,240 homes</span></div>
+      </div>
+      <div class="city-card" onclick="filterByCity('Los Angeles')">
+        <div class="cc-img" style="background-image:url('https://images.unsplash.com/photo-1449034446853-66c86144b0ad?w=600&q=80')"></div>
+        <div class="cc-body"><span class="cc-name">Los Angeles, CA</span><span class="cc-ct">2,890 homes</span></div>
+      </div>
+      <div class="city-card" onclick="filterByCity('Miami')">
+        <div class="cc-img" style="background-image:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80')"></div>
+        <div class="cc-body"><span class="cc-name">Miami, FL</span><span class="cc-ct">2,110 homes</span></div>
+      </div>
+      <div class="city-card" onclick="filterByCity('Chicago')">
+        <div class="cc-img" style="background-image:url('https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=600&q=80')"></div>
+        <div class="cc-body"><span class="cc-name">Chicago, IL</span><span class="cc-ct">1,780 homes</span></div>
+      </div>
+      <div class="city-card" onclick="filterByCity('Austin')">
+        <div class="cc-img" style="background-image:url('https://images.unsplash.com/photo-1531218150217-54595bc2b934?w=600&q=80')"></div>
+        <div class="cc-body"><span class="cc-name">Austin, TX</span><span class="cc-ct">1,440 homes</span></div>
+      </div>
+      <div class="city-card" onclick="filterByCity('Seattle')">
+        <div class="cc-img" style="background-image:url('https://images.unsplash.com/photo-1542223616-9de9adb5e3e8?w=600&q=80')"></div>
+        <div class="cc-body"><span class="cc-name">Seattle, WA</span><span class="cc-ct">980 homes</span></div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="wordmark">Haven</span>
+        <p class="footer-tagline">The smarter way to find home.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Renters</h4>
+          <a href="#">Find an apartment</a>
+          <a href="#">Search by neighborhood</a>
+          <a href="#">Moving checklist</a>
+          <a href="#">Renter's guide</a>
+        </div>
+        <div class="footer-col">
+          <h4>Landlords</h4>
+          <a href="#">List your property</a>
+          <a href="#">Landlord tools</a>
+          <a href="#">Pricing</a>
+          <a href="#">Support</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="#">About Haven</a>
+          <a href="#">Careers</a>
+          <a href="#">Press</a>
+          <a href="#">Privacy</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Haven, Inc. All rights reserved.</span>
+      <span>Built with care for renters everywhere.</span>
+    </div>
+  </footer>
+
+</section>
+
+<!-- ── LISTINGS ── -->
+<section id="view-listings" class="view">
+  <div class="ls-layout">
+
+    <div class="ls-panel" id="ls-panel">
+      <div class="ls-toolbar">
+        <div class="ls-search-wrap">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="9" r="6.5"/><path d="m15.5 15.5 3 3" stroke-linecap="round"/></svg>
+          <input id="ls-search" type="text" placeholder="City, neighborhood, address…" oninput="applyFilters()" />
+        </div>
+        <div class="ls-filters">
+          <select id="filter-beds" onchange="applyFilters()">
+            <option value="">Beds</option>
+            <option value="studio">Studio</option>
+            <option value="1">1 bd</option>
+            <option value="2">2 bd</option>
+            <option value="3">3 bd</option>
+            <option value="4">4+ bd</option>
+          </select>
+          <select id="filter-price" onchange="applyFilters()">
+            <option value="">Price</option>
+            <option value="1500">≤ $1,500</option>
+            <option value="2500">≤ $2,500</option>
+            <option value="3500">≤ $3,500</option>
+            <option value="5000">≤ $5,000</option>
+          </select>
+          <select id="filter-type" onchange="applyFilters()">
+            <option value="">Type</option>
+            <option value="apartment">Apartment</option>
+            <option value="condo">Condo</option>
+            <option value="house">House</option>
+            <option value="townhouse">Townhouse</option>
+          </select>
+          <button class="btn-more" id="btn-more" onclick="toggleFilters()">
+            <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.7"><line x1="2" y1="5" x2="16" y2="5"/><line x1="5" y1="9" x2="13" y2="9"/><line x1="7.5" y1="13" x2="10.5" y2="13"/></svg>
+            Filters
+          </button>
+        </div>
+      </div>
+
+      <div class="extra-filters" id="extra-filters" style="display:none">
+        <div class="ef-grid">
+          <div class="ef-group"><label>Min sqft</label><input type="number" id="filter-sqft-min" placeholder="500" oninput="applyFilters()" /></div>
+          <div class="ef-group"><label>Max sqft</label><input type="number" id="filter-sqft-max" placeholder="2,000" oninput="applyFilters()" /></div>
+          <div class="ef-group"><label>Min baths</label>
+            <select id="filter-baths" onchange="applyFilters()">
+              <option value="">Any</option><option value="1">1+</option><option value="2">2+</option><option value="3">3+</option>
+            </select>
+          </div>
+          <div class="ef-group"><label>Sort by</label>
+            <select id="filter-sort" onchange="applyFilters()">
+              <option value="newest">Newest</option>
+              <option value="price-asc">Price ↑</option>
+              <option value="price-desc">Price ↓</option>
+              <option value="sqft">Largest</option>
+            </select>
+          </div>
+        </div>
+        <div class="ef-checks">
+          <label class="ef-check"><input type="checkbox" id="filter-pet" onchange="applyFilters()" /><span>Pet friendly</span></label>
+          <label class="ef-check"><input type="checkbox" id="filter-parking" onchange="applyFilters()" /><span>Parking</span></label>
+          <label class="ef-check"><input type="checkbox" id="filter-gym" onchange="applyFilters()" /><span>Gym</span></label>
+          <label class="ef-check"><input type="checkbox" id="filter-pool" onchange="applyFilters()" /><span>Pool</span></label>
+          <label class="ef-check"><input type="checkbox" id="filter-laundry" onchange="applyFilters()" /><span>In-unit W/D</span></label>
+        </div>
+      </div>
+
+      <div class="ls-meta">
+        <span id="ls-count" class="ls-count">— homes</span>
+        <div class="view-btns">
+          <button id="btn-grid" class="vbtn active" onclick="setCardView('grid')" title="Grid">
+            <svg viewBox="0 0 16 16" fill="currentColor"><rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/><rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg>
+          </button>
+          <button id="btn-list" class="vbtn" onclick="setCardView('list')" title="List">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1" y="1" width="5" height="4" rx="1"/><line x1="8" y1="2" x2="15" y2="2"/><line x1="8" y1="4" x2="13" y2="4"/><rect x="1" y="7" width="5" height="4" rx="1"/><line x1="8" y1="8" x2="15" y2="8"/><line x1="8" y1="10" x2="13" y2="10"/><rect x="1" y="13" width="5" height="3" rx="1"/><line x1="8" y1="14" x2="15" y2="14"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="ls-grid" id="ls-grid"></div>
+      <div class="ls-pager" id="ls-pager"></div>
+    </div>
+
+    <div class="ls-map" id="ls-map">
+      <div class="map-wrap">
+        <!-- Inline SVG so CSS custom properties work on fill via class -->
+        <svg class="map-svg" viewBox="0 0 640 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <rect class="mg" width="640" height="520"/>
+          <rect class="mr" x="0" y="100" width="640" height="9"/>
+          <rect class="mr" x="0" y="210" width="640" height="7"/>
+          <rect class="mr" x="0" y="310" width="640" height="9"/>
+          <rect class="mr" x="0" y="420" width="640" height="6"/>
+          <rect class="mr" x="90"  y="0"   width="9" height="520"/>
+          <rect class="mr" x="220" y="0"   width="7" height="520"/>
+          <rect class="mr" x="380" y="0"   width="9" height="520"/>
+          <rect class="mr" x="510" y="0"   width="7" height="520"/>
+          <rect class="mb"  x="10"  y="10"  width="70"  height="82"  rx="3"/>
+          <rect class="mbb" x="105" y="10"  width="105" height="82"  rx="3"/>
+          <rect class="mb"  x="230" y="10"  width="140" height="82"  rx="3"/>
+          <rect class="mbb" x="395" y="10"  width="105" height="82"  rx="3"/>
+          <rect class="mb"  x="522" y="10"  width="108" height="82"  rx="3"/>
+          <rect class="mbb" x="10"  y="115" width="70"  height="87"  rx="3"/>
+          <rect class="mb"  x="105" y="115" width="105" height="87"  rx="3"/>
+          <rect class="mbb" x="230" y="115" width="140" height="87"  rx="3"/>
+          <rect class="mb"  x="395" y="115" width="105" height="87"  rx="3"/>
+          <rect class="mbb" x="522" y="115" width="108" height="87"  rx="3"/>
+          <rect class="mb"  x="10"  y="222" width="70"  height="80"  rx="3"/>
+          <rect class="mbb" x="105" y="222" width="105" height="80"  rx="3"/>
+          <rect class="mb"  x="230" y="222" width="140" height="80"  rx="3"/>
+          <rect class="mbb" x="395" y="222" width="105" height="80"  rx="3"/>
+          <rect class="mb"  x="522" y="222" width="108" height="80"  rx="3"/>
+          <rect class="mbb" x="10"  y="322" width="70"  height="90"  rx="3"/>
+          <rect class="mb"  x="105" y="322" width="105" height="90"  rx="3"/>
+          <rect class="mbb" x="230" y="322" width="140" height="90"  rx="3"/>
+          <rect class="mb"  x="395" y="322" width="105" height="90"  rx="3"/>
+          <rect class="mbb" x="522" y="322" width="108" height="90"  rx="3"/>
+          <rect class="mb"  x="10"  y="432" width="70"  height="80"  rx="3"/>
+          <rect class="mbb" x="105" y="432" width="105" height="80"  rx="3"/>
+          <rect class="mb"  x="230" y="432" width="140" height="80"  rx="3"/>
+          <rect class="mbb" x="395" y="432" width="105" height="80"  rx="3"/>
+          <rect class="mb"  x="522" y="432" width="108" height="80"  rx="3"/>
+        </svg>
+        <div class="map-pins" id="map-pins"></div>
+        <div class="map-ctrls">
+          <button class="map-ctrl" onclick="showToast('Zoomed in')">+</button>
+          <button class="map-ctrl" onclick="showToast('Zoomed out')">−</button>
+        </div>
+        <button class="map-toggle-btn" onclick="toggleMap()">
+          <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6"><polygon points="1 5 1 17 6.5 14 11.5 17 17 14 17 1 11.5 4 6.5 1 1 5"/><line x1="6.5" y1="1" x2="6.5" y2="14"/><line x1="11.5" y1="4" x2="11.5" y2="17"/></svg>
+          <span id="map-toggle-label">Hide map</span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── DETAIL ── -->
+<section id="view-detail" class="view">
+  <div id="detail-root"></div>
+</section>
+
+<!-- ── MODAL ── -->
+<div class="modal-bg" id="modal-bg" onclick="closeModal()">
+  <div class="modal" onclick="event.stopPropagation()">
+    <button class="modal-x" onclick="closeModal()">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="2" y1="2" x2="14" y2="14"/><line x1="14" y1="2" x2="2" y2="14"/></svg>
+    </button>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<!-- ── TOAST ── -->
+<div class="toast" id="toast"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
